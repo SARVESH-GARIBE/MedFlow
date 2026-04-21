@@ -1,0 +1,29 @@
+import mongoose from "mongoose";
+
+const notificationSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      refPath: 'role'
+    },
+    role: {
+      type: String,
+      enum: ["doctor", "patient"],
+      required: true,
+    },
+    message: {
+      type: String,
+      required: true,
+    },
+    isRead: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
+
+const Notification = mongoose.model("Notification", notificationSchema);
+
+export default Notification;
